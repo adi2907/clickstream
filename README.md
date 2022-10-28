@@ -10,6 +10,7 @@ The repo is organized as follows
     b. Store in raw database
     c. Processed database for analytics at user level
     d. API to expose processed database
+The server code is here https://github.com/adi2907/clickstream-server
 
 3. Testing framework
 
