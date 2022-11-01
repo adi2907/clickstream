@@ -19,6 +19,9 @@ Steps
 a. Add event_capture.js in the assets/js of your theme
 b. Add the content in functions.php file of your theme
 
+Now once we start the server, the file will start sending events
+
+
 
 
 
