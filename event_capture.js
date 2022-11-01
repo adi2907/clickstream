@@ -72,7 +72,7 @@ document.addEventListener('click', function(event) {
             console.log(events);
             localStorage.removeItem('events');
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'http://127.0.0.1:8000/events/', true);
+            xhr.open('POST', 'http://3.110.173.23/events/', true);
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.send(JSON.stringify(events));
         }
@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
             console.log(events);
             localStorage.removeItem('events');
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'http://127.0.0.1:8000/events/', true);
+            xhr.open('POST', 'http://3.110.173.23/events/', true);
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.send(JSON.stringify(events));
         }
