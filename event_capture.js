@@ -1,9 +1,6 @@
-//capture events and log them to the console
-
-
 // capture click events in the page
-document.addEventListener('click', function(event) {
-    
+
+document.addEventListener('click', function(event) {    
     // create a token identifier for this session and store in browser local storage
     var token = localStorage.getItem('token');
     if (!token) {
@@ -26,8 +23,9 @@ document.addEventListener('click', function(event) {
     var user_id = current_user.ID;
     var user_regd = current_user.data.user_registered;
     
-    // create a UTC timestamp in GMT
-    var timestamp = new Date().toUTCString();
+    // create a epoch timestamp
+    var timestamp = Math.floor(Date.now() / 1000);
+
     
     // get user agent
     var userAgent = navigator.userAgent;
@@ -38,6 +36,11 @@ document.addEventListener('click', function(event) {
     // get OS
     var OS = navigator.platform;
     var event_type = 'click';
+    var event_name = '';
+    // get the element text that was clicked
+    var element_text = event.target.innerText;
+    // get the url
+    var url = window.location.href;
 
     // push the event to a stack
     var event = {
@@ -51,23 +54,35 @@ document.addEventListener('click', function(event) {
         'browser': browser,
         'browserVersion': browserVersion,
         'OS': OS,
-        'event_type': event_type
+        'click_text': element_text,
+        'event_type': event_type,
+        'event_name': event_name,
+        'source_url': url
     };
-    var events = localStorage.getItem('events');
-    if (!events) {
-        events = [];
-    } else {
-        events = JSON.parse(events);
-    }
+    // Intiailize events array if not already done
+    events = JSON.parse(localStorage.getItem("events") || "[]");
     events.push(event);
-    // console log the event, time, url and text
-    //console.log(event_type,user_id,user_login,user_regd,event.target, timestamp, window.location.href, event.target.innerText, token, session, browser, browserVersion, OS);
-
-}, true);
-
-// capture click events in the page
-document.addEventListener('load', function(event) {
+    localStorage.setItem("events", JSON.stringify(events));
     
+    // send event to server in gap of 10 seconds
+    setTimeout(function() {
+        var events = localStorage.getItem('events');
+        if (events) {
+            events = JSON.parse(events);
+            console.log(events);
+            localStorage.removeItem('events');
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'http://127.0.0.1:8000/events/', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify(events));
+        }
+    },10000);
+});
+
+
+
+// capture  page load events
+document.addEventListener('DOMContentLoaded', function(event) {    
     // create a token identifier for this session and store in browser local storage
     var token = localStorage.getItem('token');
     if (!token) {
@@ -90,8 +105,10 @@ document.addEventListener('load', function(event) {
     var user_id = current_user.ID;
     var user_regd = current_user.data.user_registered;
     
-    // create a UTC timestamp in GMT
-    var timestamp = new Date().toUTCString();
+    // create a epoch timestamp
+    var timestamp = Math.floor(Date.now() / 1000);
+
+    
     // get user agent
     var userAgent = navigator.userAgent;
     // get browswer
@@ -100,7 +117,12 @@ document.addEventListener('load', function(event) {
     var browserVersion = navigator.appVersion;
     // get OS
     var OS = navigator.platform;
-    var event_type = 'load';
+    var event_type = 'page_load';
+    var event_name = 'page_load';
+    // get the element text that was clicked
+    var element_text = event.target.innerText;
+    // get the url
+    var url = window.location.href;
 
     // push the event to a stack
     var event = {
@@ -114,28 +136,28 @@ document.addEventListener('load', function(event) {
         'browser': browser,
         'browserVersion': browserVersion,
         'OS': OS,
-        'event_type': event_type
+        'click_text': element_text,
+        'event_type': event_type,
+        'event_name': event_name,
+        'source_url': url
     };
-    var events = localStorage.getItem('events');
-    if (!events) {
-        events = [];
-    } else {
-        events = JSON.parse(events);
-    }
+    // Intiailize events array if not already done
+    events = JSON.parse(localStorage.getItem("events") || "[]");
     events.push(event);
-}, true);
-
-// send events to server every 10 seconds through Ajax
-setInterval(function() {
-    var events = localStorage.getItem('events');
-    if (!events) {
-        return;
-    }
-    events = JSON.parse(events);
-    localStorage.removeItem('events');
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://localhost:3000/events', true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify(events));
-}  , 10000);
+    localStorage.setItem("events", JSON.stringify(events));
+    
+    // send event to server in gap of 10 seconds
+    setTimeout(function() {
+        var events = localStorage.getItem('events');
+        if (events) {
+            events = JSON.parse(events);
+            console.log(events);
+            localStorage.removeItem('events');
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'http://127.0.0.1:8000/events/', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify(events));
+        }
+    },10000);
+});
 
