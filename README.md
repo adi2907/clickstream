@@ -1,25 +1,35 @@
 # clickstream
-DIY clickstream framework http://adiganguli.com/2022/10/15/a-diy-clickstream-framework/
+DIY clickstream framework https://www.adiganguli.com/category/analytics/clickstream/
 
 A guided tour to build your own clickstream framework using Javascript and python
+This is a generic framework, however for demo purposes we have used a demo wordpress site https://www.adiganguli.com/test-shopping/
+
 The repo is organized as follows
 
-1. Javascript file - to be inserted in website download
-2. Server code which is divided into 4 parts. Its written in Django
-    a. Read event code
-    b. Store in raw database
-    c. Processed database for analytics at user level
-    d. API to expose processed database
+1. Client code which captures the clicks and sends them to the server hosted on https://almeapp.com. It has two main files
+    a. Javascript file which will need to be downloaded on the client or user's machine. See the steps below for Wordpress
+    b. Functions.php file for wordpress, will need to be inserted in the functions.php file of the wordpress theme
+
+Detailed explanation on event capture here https://www.adiganguli.com/2022/10/26/diy-clickstream-framework-1-data-capture/
+
+2. Server code using Django which
+    a. Reads the events
+    b. Stores in raw database (mysql)
+  
 The server code is here https://github.com/adi2907/clickstream-server
 
-3. Testing framework
+Detailed explanation on server code here https://www.adiganguli.com/2022/11/01/diy-clickstream-framework-2-events-storage-in-database/
 
-Steps
-1. For Wordpress
-a. Add event_capture.js in the assets/js of your theme
-b. Add the content in functions.php file of your theme
 
-Now once we start the server, the file will start sending events
+To run (for wordpress)
+
+1. Insert event_capture.js in assets/js folder of the running theme - This will insert the javascript in the client machine
+2. Insert the code in functions.php file into the functions.php file of your runnning theme
+
+3. Start the server. Follow the steps mentioned for deploying a Django apache server here https://www.adiganguli.com/2022/11/01/diy-clickstream-4-deployment/
+4. Modify the Django code and settings.py file as per the code in our server
+
+
 
 
 

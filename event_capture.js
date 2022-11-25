@@ -26,22 +26,13 @@ document.addEventListener('click', function(event) {
     // create a epoch timestamp
     var timestamp = Math.floor(Date.now() / 1000);
 
-    
-    // get user agent
-    var userAgent = navigator.userAgent;
-    // get browswer
-    var browser = navigator.appName;
-    // get browser version
-    var browserVersion = navigator.appVersion;
-    // get OS
-    var OS = navigator.platform;
     var event_type = 'click';
     var event_name = '';
     // get the element text that was clicked
     var element_text = event.target.innerText;
     // get the url
     var url = window.location.href;
-
+    var appName = "desi_sandook";
     // push the event to a stack
     var event = {
         'token': token,
@@ -50,14 +41,11 @@ document.addEventListener('click', function(event) {
         'user_id': user_id,
         'user_regd': user_regd,
         'click_time': timestamp,
-        'userAgent': userAgent,
-        'browser': browser,
-        'browserVersion': browserVersion,
-        'OS': OS,
         'click_text': element_text,
         'event_type': event_type,
         'event_name': event_name,
-        'source_url': url
+        'source_url': url,
+        'app_name': appName
     };
     // Intiailize events array if not already done
     events = JSON.parse(localStorage.getItem("events") || "[]");
@@ -69,10 +57,9 @@ document.addEventListener('click', function(event) {
         var events = localStorage.getItem('events');
         if (events) {
             events = JSON.parse(events);
-            console.log(events);
             localStorage.removeItem('events');
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'http://3.110.173.23/events/', true);
+            xhr.open('POST', 'https://almeapp.com/events/', true);
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.send(JSON.stringify(events));
         }
@@ -108,22 +95,13 @@ document.addEventListener('DOMContentLoaded', function(event) {
     // create a epoch timestamp
     var timestamp = Math.floor(Date.now() / 1000);
 
-    
-    // get user agent
-    var userAgent = navigator.userAgent;
-    // get browswer
-    var browser = navigator.appName;
-    // get browser version
-    var browserVersion = navigator.appVersion;
-    // get OS
-    var OS = navigator.platform;
     var event_type = 'page_load';
     var event_name = 'page_load';
     // get the element text that was clicked
     var element_text = event.target.innerText;
     // get the url
     var url = window.location.href;
-
+    var appName = "desi_sandook";
     // push the event to a stack
     var event = {
         'token': token,
@@ -132,14 +110,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
         'user_id': user_id,
         'user_regd': user_regd,
         'click_time': timestamp,
-        'userAgent': userAgent,
-        'browser': browser,
-        'browserVersion': browserVersion,
-        'OS': OS,
         'click_text': element_text,
         'event_type': event_type,
         'event_name': event_name,
-        'source_url': url
+        'source_url': url,
+        'app_name': appName
     };
     // Intiailize events array if not already done
     events = JSON.parse(localStorage.getItem("events") || "[]");
@@ -151,10 +126,9 @@ document.addEventListener('DOMContentLoaded', function(event) {
         var events = localStorage.getItem('events');
         if (events) {
             events = JSON.parse(events);
-            console.log(events);
             localStorage.removeItem('events');
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'http://3.110.173.23/events/', true);
+            xhr.open('POST', 'https://almeapp.com/events/', true);
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.send(JSON.stringify(events));
         }
