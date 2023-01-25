@@ -12,7 +12,7 @@ The repo is organized as follows
 
     b. Functions.php file for wordpress, will need to be inserted in the functions.php file of the wordpress theme
 
-Detailed explanation on event capture here https://www.adiganguli.com/2022/10/26/diy-clickstream-framework-1-data-capture/
+Detailed explanation on event capture here https://www.adiganguli.com/diy-clickstream-framework-1-data-capture/
 
 2. Server code using Django which
 
@@ -22,7 +22,7 @@ Detailed explanation on event capture here https://www.adiganguli.com/2022/10/26
   
 The server code is here https://github.com/adi2907/clickstream-server
 
-Detailed explanation on server code here https://www.adiganguli.com/2022/11/01/diy-clickstream-framework-2-events-storage-in-database/
+Detailed explanation on server code here https://www.adiganguli.com/diy-clickstream-framework-2-events-storage-in-database/
 
 
 To run (for wordpress)
